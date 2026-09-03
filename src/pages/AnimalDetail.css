@@ -1,0 +1,170 @@
+/* animal-detail.css */
+
+.animal-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  padding: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted, #6b7280);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.back-link:hover { color: var(--text, #111827); }
+
+.animal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.eyebrow {
+  margin: 0 0 4px;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted, #6b7280);
+}
+.animal-header .page-title { margin: 0; }
+.animal-header .page-subtitle { margin: 4px 0 0; color: var(--text-muted, #6b7280); }
+
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+.animal-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--chip-bg, #f3f4f6);
+  color: var(--chip-text, #374151);
+}
+.tag-actif          { background: #dcfce7; color: #15803d; }
+.tag-vendu          { background: #e5e7eb; color: #374151; }
+.tag-abattu,
+.tag-mort           { background: #fee2e2; color: #b91c1c; }
+.tag-en_quarantaine { background: #ffedd5; color: #c2410c; }
+.tag-transfere      { background: #e0e7ff; color: #4338ca; }
+.tag-perdu          { background: #f3e8ff; color: #7e22ce; }
+.tag-sain            { background: #dcfce7; color: #15803d; }
+.tag-malade         { background: #fee2e2; color: #b91c1c; }
+.tag-sous_traitement{ background: #fef9c3; color: #a16207; }
+.tag-isole          { background: #ffedd5; color: #c2410c; }
+
+/* details grid */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px 24px;
+  margin: 0;
+}
+.detail-field dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-muted, #6b7280);
+  margin-bottom: 3px;
+}
+.detail-field dd {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 550;
+}
+
+.ref-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent, #16a34a);
+  font-weight: 600;
+  text-decoration: none;
+}
+.ref-link:hover { text-decoration: underline; }
+
+.state { color: var(--text-muted, #6b7280); font-size: 0.9rem; }
+.state--error { color: var(--danger, #b91c1c); }
+
+/* ── Pédigrée tree ──────────────────────── */
+.pedigree-wrap { overflow-x: auto; padding-bottom: 4px; }
+
+.ped-headers {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 8px;
+  min-width: 480px;
+}
+.ped-headers span {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  color: var(--text-muted, #6b7280);
+}
+
+.pedigree-grid {
+  display: grid;
+  gap: 12px;
+  min-width: 480px;
+  align-items: center;
+}
+
+.ped-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-height: 54px;
+  padding: 9px 12px;
+  border: 1px solid var(--border, #e5e7eb);
+  border-left-width: 4px;
+  border-radius: 10px;
+  background: var(--surface, #fff);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+a.ped-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  border-color: var(--line, #cbd5e1);
+}
+a.ped-card:focus-visible {
+  outline: 2px solid var(--accent, #16a34a);
+  outline-offset: 2px;
+}
+
+.ped-card.is-dam   { border-left-color: #db2777; }
+.ped-card.is-sire  { border-left-color: #2563eb; }
+.ped-card.is-subject {
+  border-left-color: #16a34a;
+  background: color-mix(in srgb, #16a34a 6%, var(--surface, #fff));
+}
+.ped-card.is-unknown {
+  border-style: dashed;
+  opacity: 0.55;
+}
+
+.ped-rel {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted, #6b7280);
+}
+.ped-rfid { font-weight: 650; font-size: 0.85rem; }
+.ped-meta { font-size: 0.72rem; color: var(--text-muted, #6b7280); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ped-card { transition: none; }
+  a.ped-card:hover { transform: none; }
+}

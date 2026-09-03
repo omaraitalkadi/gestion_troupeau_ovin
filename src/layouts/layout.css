@@ -1,0 +1,303 @@
+/* =====================================================================
+   layout.css — Shell + sidebar (design minimaliste, responsive)
+   ---------------------------------------------------------------------
+   • Sélecteurs scopés sous .app-shell : priment sur tes anciennes règles
+     sans dépendre de l'ordre d'import.
+   • Tokens locaux (--nv-*) : n'affectent pas le style des pages.
+   ===================================================================== */
+
+.app-shell {
+  --nv-bg-side:   #FDFBF7;
+  --nv-bg-main:   #F6F4EE;
+  --nv-ink:       #1C201B;
+  --nv-muted:     #6E736C;
+  --nv-faint:     #A7A99F;
+  --nv-line:      #ECE7DC;
+  --nv-brand:     #2F6F4E;
+  --nv-brand-ink: #245C40;
+  --nv-brand-soft:#E7F0E9;
+  --nv-hover:     #F2EFE7;
+
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--nv-bg-main);
+  color: var(--nv-ink);
+}
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+.app-shell .sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  flex-shrink: 0;
+  height: 100vh;
+  padding: 22px 16px 18px;
+  background: var(--nv-bg-side);
+  border-right: 1px solid var(--nv-line);
+}
+
+/* Marque / logo */
+.app-shell .brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 2px 6px 0;
+  margin-bottom: 26px;
+}
+.app-shell .brand-mark {
+  flex: 0 0 auto;
+  display: inline-flex;
+  color: var(--nv-brand);
+}
+.app-shell .brand-mark svg { display: block; }
+.app-shell .brand-title {
+  font-size: 18px;
+  font-weight: 680;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: var(--nv-ink);
+}
+
+/* ── Navigation ──────────────────────────────────────────── */
+.app-shell .nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+.app-shell .nav-section { margin-bottom: 14px; }
+.app-shell .nav-section-label {
+  padding: 0 8px;
+  margin: 0 0 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--nv-faint);
+}
+
+.app-shell .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  font-size: 13.5px;
+  font-weight: 550;
+  color: var(--nv-muted);
+  text-decoration: none;
+  transition: background-color 0.14s ease, color 0.14s ease;
+}
+.app-shell .nav-link svg {
+  flex: 0 0 auto;
+  color: var(--nv-faint);
+  transition: color 0.14s ease;
+}
+.app-shell .nav-link:hover {
+  background: var(--nv-hover);
+  color: var(--nv-ink);
+}
+.app-shell .nav-link:hover svg { color: var(--nv-muted); }
+
+.app-shell .nav-link.is-active {
+  background: var(--nv-brand-soft);
+  color: var(--nv-brand-ink);
+  font-weight: 650;
+}
+.app-shell .nav-link.is-active svg { color: var(--nv-brand); }
+
+/* Badge (compteur notifications) */
+.app-shell .nav-badge {
+  margin-left: auto;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  background: var(--nv-brand);
+  border-radius: 999px;
+}
+
+/* ── Pied : utilisateur + déconnexion ────────────────────── */
+.app-shell .sidebar-footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--nv-line);
+}
+.app-shell .user-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px;
+}
+.app-shell .user-avatar {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--nv-brand);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+.app-shell .user-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.app-shell .user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--nv-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-shell .user-role {
+  font-size: 11px;
+  color: var(--nv-muted);
+}
+.app-shell .icon-btn {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  color: var(--nv-faint);
+  cursor: pointer;
+  transition: background-color 0.14s ease, color 0.14s ease;
+}
+.app-shell .icon-btn:hover {
+  background: #F4E9E7;
+  color: #B4342F;
+}
+
+/* ── Zone principale ─────────────────────────────────────── */
+.app-shell .main {
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.app-shell .topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  flex-shrink: 0;
+  padding: 0 24px;
+  background: var(--nv-bg-side);
+  border-bottom: 1px solid var(--nv-line);
+}
+.app-shell .topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.app-shell .topbar-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  color: var(--nv-muted);
+}
+.app-shell .topbar-status svg { color: var(--nv-brand); }
+
+.app-shell .content {
+  flex: 1;
+  min-height: 0;
+  padding: 26px 28px;
+  overflow-y: auto;
+}
+
+/* ── Bouton menu (mobile) + bouton fermer + voile ────────── */
+.app-shell .topbar-menu {
+  display: none;                 /* visible seulement en mobile */
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-left: -8px;
+  border: none;
+  background: none;
+  border-radius: 9px;
+  color: var(--nv-ink);
+  cursor: pointer;
+  transition: background-color 0.14s ease;
+}
+.app-shell .topbar-menu:hover { background: var(--nv-hover); }
+
+.app-shell .sidebar-close {
+  display: none;                 /* visible seulement en mobile */
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  color: var(--nv-muted);
+  cursor: pointer;
+}
+.app-shell .sidebar-close:hover { background: var(--nv-hover); color: var(--nv-ink); }
+
+.app-shell .sidebar-backdrop { display: none; }
+
+/* ── Mobile ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .app-shell .sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    z-index: 60;
+    width: 270px;
+    height: 100%;
+    transform: translateX(-100%);
+    transition: transform 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .app-shell .sidebar.is-open {
+    transform: translateX(0);
+    box-shadow: 8px 0 30px rgba(20, 22, 18, 0.22);
+  }
+  .app-shell .sidebar-close { display: grid; }
+
+  .app-shell .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(20, 22, 18, 0.42);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.24s ease;
+  }
+  .app-shell .sidebar-backdrop.is-open { opacity: 1; pointer-events: auto; }
+
+  .app-shell .topbar-menu { display: flex; }
+  .app-shell .main { width: 100%; }
+  .app-shell .content { padding: 18px 16px; }
+
+  /* Contenu : empile les grilles 2 colonnes */
+  .app-shell .grid-2 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+  .app-shell .topbar { padding: 0 16px; }
+  .app-shell .dashboard-header { flex-direction: column; align-items: flex-start; gap: 14px; }
+}

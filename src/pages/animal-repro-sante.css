@@ -1,0 +1,80 @@
+/* animal-repro-sante.css — panneaux reproduction/gestation/vaccination + modale lot.
+   Importer dans AnimalDetail. Palette calée sur l'app. */
+:root {
+  --ars-moss: #2f6f4e; --ars-moss-soft: #eaf3ee;
+  --ars-ink: #1f2421; --ars-muted: #8a908b; --ars-line: #e9e6df;
+  --ars-terra: #b45333; --ars-warn-bg: #fdf2ee; --ars-warn-bd: #e7b9a7; --ars-warn-ink: #a23c1e;
+  --ars-err: #b4342f; --ars-radius: 12px; --ars-radius-sm: 9px;
+}
+
+/* En-tête de carte avec action à droite */
+.card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.card-head h2 { display: flex; align-items: center; gap: 8px; }
+.card-head h2 svg { color: var(--ars-moss); }
+
+/* Boutons */
+.btn-primary, .btn-ghost { display: inline-flex; align-items: center; gap: 6px; border-radius: var(--ars-radius-sm); font-weight: 600; cursor: pointer; transition: all .15s ease; }
+.btn-sm { padding: 7px 12px; font-size: 13px; }
+.btn-primary { background: var(--ars-moss); color: #fff; border: none; }
+.btn-primary:hover:not(:disabled) { background: #285f43; }
+.btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+.btn-ghost { background: #fff; color: var(--ars-ink); border: 1px solid var(--ars-line); }
+.btn-ghost:hover:not(:disabled) { background: #f7f5f0; border-color: #d8d3ca; }
+.btn-ghost:disabled { opacity: .5; cursor: not-allowed; }
+.btn-icon { display: inline-flex; padding: 6px; background: none; border: none; color: var(--ars-muted); cursor: pointer; border-radius: 6px; }
+.btn-icon:hover { color: var(--ars-ink); background: var(--ars-line); }
+
+/* Listes repro/gestation/vaccin */
+.repro-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.repro-item { border: 1px solid var(--ars-line); border-radius: var(--ars-radius); padding: 14px 16px; background: #fff; }
+.repro-item-main { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.repro-dates { font-size: 12.5px; color: var(--ars-muted); }
+
+/* Badges de statut */
+.repro-badge { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+.repro-en_chaleur { background: #fdecef; color: #c0365a; }
+.repro-saillie    { background: #eef2fd; color: #3a5bb0; }
+.repro-gestante   { background: var(--ars-moss-soft); color: var(--ars-moss); }
+.repro-en_cours   { background: var(--ars-moss-soft); color: var(--ars-moss); }
+.repro-non_saillie, .repro-non_gestante, .repro-cloturee, .repro-terminee {
+  background: #f0ede6; color: #6b7169;
+}
+
+/* Actions dans un item */
+.repro-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+
+/* Sélecteur bélier / formulaire */
+.belier-picker, .naissance-form { margin-top: 12px; padding: 14px; background: #faf9f5; border: 1px solid var(--ars-line); border-radius: var(--ars-radius); display: flex; flex-direction: column; gap: 8px; }
+.bp-label { font-size: 12px; font-weight: 600; color: var(--ars-ink); margin-top: 4px; }
+.bp-select, .bp-input {
+  padding: 9px 11px; border: 1px solid var(--ars-line); border-radius: var(--ars-radius-sm);
+  font-size: 13px; background: #fff; color: var(--ars-ink); width: 100%; box-sizing: border-box;
+}
+.bp-select:focus, .bp-input:focus { outline: none; border-color: var(--ars-moss); box-shadow: 0 0 0 3px var(--ars-moss-soft); }
+.bp-input-sm { max-width: 110px; }
+
+/* Ligne agneau */
+.agneau-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.agneau-row .bp-select { max-width: 120px; }
+.agneau-row .bp-input { flex: 1; min-width: 100px; }
+
+/* Messages d'erreur inline */
+.inline-error { display: flex; align-items: center; gap: 6px; background: #fdeceb; color: var(--ars-err); border: 1px solid #efc7c4; border-radius: var(--ars-radius-sm); padding: 8px 10px; font-size: 12.5px; margin: 8px 0; }
+.muted-row { display: flex; align-items: center; gap: 6px; color: var(--ars-muted); font-size: 13px; padding: 6px 0; }
+
+/* Modale (changer de lot) */
+.modal-overlay { position: fixed; inset: 0; background: rgba(31,36,33,.45); display: grid; place-items: center; z-index: 60; padding: 20px; }
+.modal { background: #fff; border-radius: 16px; width: 100%; max-width: 440px; padding: 22px 24px; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
+.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.modal-header h2 { display: flex; align-items: center; gap: 8px; font-size: 17px; }
+.modal-header h2 svg { color: var(--ars-moss); }
+.modal-body { display: flex; flex-direction: column; gap: 8px; }
+.modal-footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
+.modal-footer-col { flex-direction: column; }
+.modal-footer-col .btn-sm { width: 100%; justify-content: center; }
+.modal-note { display: flex; align-items: flex-start; gap: 6px; font-size: 12.5px; color: var(--ars-warn-ink); background: var(--ars-warn-bg); border: 1px solid var(--ars-warn-bd); border-radius: var(--ars-radius-sm); padding: 10px 12px; margin-top: 8px; }
+.modal-note svg { flex-shrink: 0; margin-top: 1px; }
+.confirm-text { font-size: 14px; line-height: 1.5; color: var(--ars-ink); margin: 0 0 6px; }
+
+.spin { animation: ars-spin 1s linear infinite; }
+@keyframes ars-spin { to { transform: rotate(360deg); } }

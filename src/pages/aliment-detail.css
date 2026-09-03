@@ -1,0 +1,161 @@
+/* ============================================================
+   aliment-detail.css — mise en forme de la page AlimentDetail
+   Tout est scopé sous .aliment-detail-page (ne fuit pas ailleurs).
+   Couleurs via tes tokens, repli neutre sinon → pas de conflit.
+   ============================================================ */
+
+.aliment-detail-page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* ── En-tête ──────────────────────────────────────────────── */
+.aliment-detail-page .page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.aliment-detail-page .link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.6rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--text-muted, #6b7580);
+  transition: color 0.12s;
+}
+.aliment-detail-page .link:hover { color: var(--accent, #2f7d5b); }
+
+.aliment-detail-page .eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted, #8a929b);
+}
+
+.aliment-detail-page .page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 650;
+  line-height: 1.15;
+  color: var(--text, #1a2027);
+}
+.aliment-detail-page .page-title svg { color: var(--accent, #2f7d5b); flex-shrink: 0; }
+
+.aliment-detail-page .page-subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted, #6b7580);
+}
+
+.aliment-detail-page .page-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ── Grille de cartes de stats ────────────────────────────── */
+.aliment-detail-page .detail-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.aliment-detail-page .detail-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #e6e9ec);
+  border-radius: var(--radius-lg, 14px);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.aliment-detail-page .detail-card:hover {
+  border-color: var(--accent-soft, #cfe3d8);
+  box-shadow: 0 6px 20px -12px rgba(17, 24, 28, 0.25);
+}
+
+.aliment-detail-page .detail-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted, #8a929b);
+}
+
+.aliment-detail-page .detail-value {
+  font-size: 1.35rem;
+  font-weight: 650;
+  line-height: 1.1;
+  color: var(--text, #1a2027);
+  font-variant-numeric: tabular-nums; /* chiffres alignés */
+}
+
+/* ── Carte vedette (stock actuel = 1re carte) ─────────────── */
+.aliment-detail-page .detail-cards .detail-card:first-child {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, var(--accent-wash, #f0f7f3), var(--surface, #fff) 70%);
+  border-color: var(--accent-soft, #cfe3d8);
+}
+.aliment-detail-page .detail-cards .detail-card:first-child .detail-value {
+  font-size: 2rem;
+  color: var(--accent-strong, #226047);
+}
+
+/* ── États (chargement / erreur / vide) ───────────────────── */
+.aliment-detail-page .table-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background: var(--surface, #ffffff);
+  border: 1px dashed var(--border, #dfe3e6);
+  border-radius: var(--radius-lg, 14px);
+  color: var(--text-muted, #6b7580);
+}
+.aliment-detail-page .table-state svg { color: var(--text-muted, #aab2ba); }
+.aliment-detail-page .table-state p { margin: 0; max-width: 44ch; }
+
+.aliment-detail-page .table-state.is-error {
+  background: var(--danger-bg, #fdf4f4);
+  border-color: var(--danger-border, #f1c7c7);
+  color: var(--danger-text, #9a2c2c);
+}
+.aliment-detail-page .table-state.is-error svg { color: var(--danger-text, #c0554f); }
+
+.aliment-detail-page .muted { color: var(--text-muted, #6b7580); }
+
+/* ── Spinner (au cas où .spin n'existe pas déjà globalement) ─ */
+.spin { animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .spin { animation: none; }
+}
+
+/* ── Mobile ───────────────────────────────────────────────── */
+@media (max-width: 560px) {
+  .aliment-detail-page .page-header { flex-direction: column; }
+  .aliment-detail-page .page-actions { width: 100%; }
+  .aliment-detail-page .detail-cards .detail-card:first-child .detail-value { font-size: 1.6rem; }
+}

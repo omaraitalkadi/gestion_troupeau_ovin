@@ -1,0 +1,60 @@
+/* =====================================================================
+   theme.css — Jetons de couleur (palette minimaliste : moss + crème)
+   ---------------------------------------------------------------------
+   Ces variables sont posées sur .app-shell. Comme TOUT le contenu des
+   pages est rendu à l'intérieur de .app-shell, elles priment sur les
+   jetons éventuellement définis dans index.css (:root) — par PROXIMITÉ,
+   sans dépendre de l'ordre d'import.
+
+   Tes pages consomment déjà ces variables via var(--jeton, repli). Elles
+   adoptent donc la nouvelle palette sans toucher à chaque fichier CSS.
+
+   NB : les couleurs "sémantiques" codées en dur (statuts EN_COURS /
+   PROGRAMMEE…, types de lot ELEVAGE / REPRODUCTION…, dam/sire du
+   pédigrée) ne sont PAS ici — elles restent volontairement colorées.
+   ===================================================================== */
+
+.app-shell {
+  /* Texte */
+  --text:        #1C201B;
+  --ink:         #1C201B;
+  --text-muted:  #6E736C;
+  --muted:       #6E736C;
+  --faint:       #A7A99F;
+
+  /* Surfaces */
+  --surface:        #FDFBF7;
+  --bg-card:        #FDFBF7;
+  --surface-2:      #F5F2EA;
+  --surface-muted:  #F1ECE1;
+  --bg:             #F6F4EE;
+
+  /* Bordures */
+  --border:       #ECE7DC;
+  --border-soft:  #F1ECE1;
+  --line:         #E1DBCF;
+
+  /* Rayon */
+  --radius: 14px;
+
+  /* Puces / chips */
+  --chip-bg:   #EEE9DE;
+  --chip-text: #55594F;
+
+  /* Marque / accent (moss) */
+  --accent:        #2F6F4E;
+  --accent-strong: #245C40;
+  --accent-soft:   #CFE0D4;
+  --accent-wash:   #E7F0E9;
+  --primary:       #2F6F4E;   /* remplace le bleu résiduel (#2563eb) */
+  --moss:          #2F6F4E;
+  --moss-soft:     #3D6052;
+  --moss-pale:     #E7F0E9;
+
+  /* Danger / alerte (brique chaude) */
+  --danger:        #B4342F;
+  --danger-text:   #A23C1E;
+  --danger-bg:     #FBEEE9;
+  --danger-border: #E9C6B8;
+  --danger-wash:   #FBEFE8;
+}

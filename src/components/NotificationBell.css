@@ -1,0 +1,173 @@
+/* ============================================================
+   NotificationBell — cloche, badge, dropdown
+   Variables surchargables depuis le thème global de l'app.
+   ============================================================ */
+
+.notif-bell {
+  --notif-bg: var(--surface, #ffffff);
+  --notif-border: var(--border, #e2e2e2);
+  --notif-text: var(--text, #1f2937);
+  --notif-muted: var(--text-muted, #6b7280);
+  --notif-accent: var(--accent, #2563eb);
+  --notif-critique: #dc2626;
+  --notif-attention: #d97706;
+  --notif-info: #9ca3af;
+
+  position: relative;
+  display: inline-flex;
+}
+
+.notif-bell-btn {
+  position: relative;
+}
+
+.notif-badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--notif-critique);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 17px;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* ---------- Dropdown ---------- */
+
+.notif-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 340px;
+  max-height: 440px;
+  display: flex;
+  flex-direction: column;
+  background: var(--notif-bg);
+  border: 1px solid var(--notif-border);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.notif-dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--notif-border);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--notif-text);
+}
+
+.notif-dropdown-footer {
+  padding: 8px 14px;
+  border-top: 1px solid var(--notif-border);
+  text-align: center;
+}
+
+.notif-btn-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--notif-accent);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.notif-btn-link:hover {
+  text-decoration: underline;
+}
+
+.notif-empty {
+  padding: 24px 14px;
+  text-align: center;
+  color: var(--notif-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* ---------- Liste ---------- */
+
+.notif-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.notif-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid var(--notif-border);
+  padding: 10px 14px 10px 11px;
+  cursor: pointer;
+  font: inherit;
+  color: var(--notif-text);
+}
+.notif-item:hover {
+  background: rgba(0, 0, 0, 0.035);
+}
+.notif-item:focus-visible {
+  outline: 2px solid var(--notif-accent);
+  outline-offset: -2px;
+}
+
+/* Sévérité : bordure gauche, pas de libellé texte */
+.notif-item.sev-critique {
+  border-left-color: var(--notif-critique);
+}
+.notif-item.sev-attention {
+  border-left-color: var(--notif-attention);
+}
+.notif-item.sev-info {
+  border-left-color: var(--notif-info);
+}
+
+/* Lue / non lue */
+.notif-item.non-lue .notif-titre {
+  font-weight: 600;
+}
+.notif-item.lue {
+  opacity: 0.6;
+}
+
+.notif-titre {
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+
+.notif-entite {
+  font-size: 0.78rem;
+  color: var(--notif-muted);
+  margin-top: 2px;
+}
+
+.notif-date {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--notif-muted);
+  margin-top: 4px;
+}
+
+/* Mobile : le dropdown ne doit pas déborder de l'écran */
+@media (max-width: 420px) {
+  .notif-dropdown {
+    position: fixed;
+    top: 56px;
+    left: 8px;
+    right: 8px;
+    width: auto;
+  }
+}

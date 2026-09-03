@@ -1,0 +1,222 @@
+/* nouvel-animal-modal.css */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 20, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+  animation: modal-fade-in 0.15s ease-out;
+}
+
+.modal-panel {
+  width: 100%;
+  max-width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: var(--radius-lg, 14px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  animation: modal-rise-in 0.18s ease-out;
+}
+
+@keyframes modal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modal-rise-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+  position: sticky;
+  top: 0;
+  background: var(--card-bg, #ffffff);
+  z-index: 1;
+}
+
+.modal-head h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text, #1a1a1a);
+}
+
+.modal-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted, #6b7280);
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.modal-close:hover {
+  background: var(--surface-hover, #f3f4f6);
+}
+
+.modal-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-banner {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+}
+
+.form-banner--error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-section-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted, #6b7280);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text, #1a1a1a);
+}
+
+.form-field span:first-child {
+  font-weight: 500;
+}
+
+.form-field input,
+.form-field select {
+  padding: 9px 11px;
+  border-radius: 8px;
+  border: 1px solid var(--border, #d1d5db);
+  background: var(--input-bg, #ffffff);
+  font-size: 0.9rem;
+  color: var(--text, #1a1a1a);
+  transition: border-color 0.12s ease;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: var(--primary, #2f6b4f);
+  box-shadow: 0 0 0 3px var(--primary-soft, rgba(47, 107, 79, 0.15));
+}
+
+.form-field input.has-error,
+.form-field select.has-error {
+  border-color: #dc2626;
+}
+
+.form-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted, #9ca3af);
+  margin: 0;
+}
+
+.field-error {
+  font-size: 0.75rem;
+  color: #dc2626;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border, #e5e7eb);
+  margin-top: 4px;
+  padding-top: 16px;
+}
+
+.btn-secondary,
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: opacity 0.12s ease, background 0.12s ease;
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: var(--border, #d1d5db);
+  color: var(--text, #1a1a1a);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-hover, #f3f4f6);
+}
+
+.btn-primary {
+  background: var(--primary, #2f6b4f);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  opacity: 0.92;
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-backdrop,
+  .modal-panel,
+  .spin {
+    animation: none;
+  }
+}

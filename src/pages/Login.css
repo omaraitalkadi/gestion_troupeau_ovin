@@ -1,0 +1,143 @@
+/* login.css — import dans Login.jsx : import "./login.css";
+   Focalisé sur le toggle admin/employé + les classes ajoutées. Palette app. */
+:root {
+  --l-bg:        #f7f5f0;
+  --l-card:      #ffffff;
+  --l-ink:       #1f2421;
+  --l-muted:     #8a908b;
+  --l-line:      #e6e2da;
+  --l-moss:      #2f6f4e;
+  --l-moss-soft: #eaf3ee;
+  --l-radius:    14px;
+  --l-radius-sm: 10px;
+}
+
+/* ── Toggle admin / employé ─────────────────────────────────────────────── */
+.login-roletabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  background: #f0ede6;
+  border-radius: 12px;
+  margin-bottom: 22px;
+}
+.login-roletab {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 10px 12px;
+  border-radius: 9px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--l-muted);
+  cursor: pointer;
+  transition: color .15s ease, background .2s ease, box-shadow .2s ease;
+}
+.login-roletab:hover:not(.active) { color: var(--l-ink); }
+.login-roletab.active {
+  background: var(--l-card);
+  color: var(--l-moss);
+  box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 0 0 1px rgba(47,111,78,.10);
+}
+.login-roletab:disabled { opacity: .6; cursor: default; }
+
+/* ── Hints (sous le champ identifiant / à côté du mot de passe) ─────────── */
+.login-hint {
+  font-size: 12px;
+  color: var(--l-muted);
+  margin: 6px 0 0;
+}
+.login-hint-inline {
+  font-size: 12px;
+  color: var(--l-muted);
+}
+
+/* ── (Optionnel) styles de base si tu n'as pas déjà login.css ───────────── */
+.login-page {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--l-bg);
+  padding: 24px; position: relative; overflow: hidden;
+}
+.login-card {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 400px;
+  background: var(--l-card);
+  border: 1px solid var(--l-line);
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 0 12px 40px rgba(31,36,33,.08);
+}
+
+.login-brand-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.login-brand-mark {
+  width: 44px; height: 44px; display: grid; place-items: center;
+  background: var(--l-moss-soft); border-radius: 12px; font-size: 22px;
+}
+.login-brand-name { font-weight: 800; font-size: 17px; color: var(--l-ink); }
+.login-brand-tagline { font-size: 12px; color: var(--l-muted); }
+
+.login-heading { margin-bottom: 20px; }
+.login-title { font-size: 24px; font-weight: 800; margin: 0 0 4px; letter-spacing: -.01em; }
+.login-subtitle { font-size: 13.5px; color: var(--l-muted); margin: 0; }
+
+.login-field { margin-bottom: 16px; }
+.login-field > label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 7px; }
+.login-field-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 7px; }
+.login-field-head > label { font-size: 13px; font-weight: 600; }
+
+.login-input-wrap { position: relative; display: flex; align-items: center; }
+.login-input-icon { position: absolute; left: 12px; color: var(--l-muted); pointer-events: none; }
+.login-input-wrap input {
+  width: 100%; box-sizing: border-box;
+  padding: 11px 40px 11px 36px;
+  border: 1px solid var(--l-line); border-radius: var(--l-radius-sm);
+  font-size: 14px; background: #fcfbf9; color: var(--l-ink);
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.login-input-wrap input:focus {
+  outline: none; border-color: var(--l-moss); background: #fff;
+  box-shadow: 0 0 0 3px var(--l-moss-soft);
+}
+.login-input-toggle {
+  position: absolute; right: 8px; display: flex; padding: 6px;
+  background: none; border: none; color: var(--l-muted); cursor: pointer; border-radius: 6px;
+}
+.login-input-toggle:hover { color: var(--l-ink); background: var(--l-line); }
+
+.login-link { color: var(--l-moss); font-size: 12.5px; text-decoration: none; font-weight: 600; }
+.login-link:hover { text-decoration: underline; }
+
+.login-remember {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--l-muted); margin-bottom: 20px; cursor: pointer;
+}
+.login-remember input { accent-color: var(--l-moss); }
+
+.login-submit {
+  width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--l-moss); color: #fff; border: none;
+  padding: 12px; border-radius: var(--l-radius-sm);
+  font-size: 14.5px; font-weight: 700; cursor: pointer;
+  transition: background .15s ease, transform .1s ease, opacity .15s ease;
+}
+.login-submit:hover:not(:disabled) { background: #285f43; }
+.login-submit:active:not(:disabled) { transform: translateY(1px); }
+.login-submit:disabled { opacity: .55; cursor: not-allowed; }
+
+.login-error {
+  display: flex; align-items: center; gap: 8px;
+  background: #fdeceb; color: #b4342f; border: 1px solid #efc7c4;
+  border-radius: var(--l-radius-sm); padding: 10px 12px; font-size: 13px; margin-bottom: 16px;
+}
+
+.login-footer { text-align: center; font-size: 13px; color: var(--l-muted); margin-top: 20px; }
+
+/* Blobs décoratifs */
+.login-blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .35; z-index: 0; }
+.login-blob-moss  { width: 380px; height: 380px; background: #9cc3ac; top: -120px; right: -100px; }
+.login-blob-terra { width: 320px; height: 320px; background: #e0a58a; bottom: -110px; left: -90px; }
+
+.spin { animation: l-spin 1s linear infinite; }
+@keyframes l-spin { to { transform: rotate(360deg); } }

@@ -1,0 +1,170 @@
+[
+  {
+    "className": "Utilisateur",
+    "relations": 16
+  },
+  {
+    "className": "Animal",
+    "relations": 16
+  },
+  {
+    "className": "Ferme",
+    "relations": 13
+  },
+  {
+    "className": "MouvementTroupeau",
+    "relations": 6
+  },
+  {
+    "className": "TransactionFinanciere",
+    "relations": 6
+  },
+  {
+    "className": "Traitement",
+    "relations": 5
+  },
+  {
+    "className": "Vaccination",
+    "relations": 5
+  },
+  {
+    "className": "Medicament",
+    "relations": 5
+  },
+  {
+    "className": "ConsultationVeterinaire",
+    "relations": 4
+  },
+  {
+    "className": "Lot",
+    "relations": 4
+  },
+  {
+    "className": "DossierMedical",
+    "relations": 4
+  },
+  {
+    "className": "Aliment",
+    "relations": 4
+  },
+  {
+    "className": "Reproduction",
+    "relations": 4
+  },
+  {
+    "className": "Production",
+    "relations": 4
+  },
+  {
+    "className": "CampagneDeVaccination",
+    "relations": 3
+  },
+  {
+    "className": "LigneAchat",
+    "relations": 3
+  },
+  {
+    "className": "ConsommationAlimentaire",
+    "relations": 3
+  },
+  {
+    "className": "PlanAlimentaire",
+    "relations": 3
+  },
+  {
+    "className": "Document",
+    "relations": 3
+  },
+  {
+    "className": "Race",
+    "relations": 2
+  },
+  {
+    "className": "Alerte",
+    "relations": 2
+  },
+  {
+    "className": "Notification",
+    "relations": 2
+  },
+  {
+    "className": "TransactionAnimaux",
+    "relations": 2
+  },
+  {
+    "className": "Gestation",
+    "relations": 2
+  },
+  {
+    "className": "LignePlanAlimentaire",
+    "relations": 2
+  },
+  {
+    "className": "DistributionAlimentaire",
+    "relations": 2
+  },
+  {
+    "className": "Abattage",
+    "relations": 2
+  },
+  {
+    "className": "Rapport",
+    "relations": 2
+  },
+  {
+    "className": "Commentaire",
+    "relations": 2
+  },
+  {
+    "className": "ConsultationDonnee",
+    "relations": 1
+  },
+  {
+    "className": "Session",
+    "relations": 1
+  },
+  {
+    "className": "HistoriqueModification",
+    "relations": 1
+  },
+  {
+    "className": "JournalVie",
+    "relations": 1
+  },
+  {
+    "className": "PhotoAnimal",
+    "relations": 1
+  },
+  {
+    "className": "Naissance",
+    "relations": 1
+  },
+  {
+    "className": "Tonte",
+    "relations": 1
+  },
+  {
+    "className": "Croissance",
+    "relations": 1
+  },
+  {
+    "className": "RegistreElevage",
+    "relations": 1
+  },
+  {
+    "className": "CarnetSanitaire",
+    "relations": 1
+  },
+  {
+    "className": "DocumentTransport",
+    "relations": 1
+  },
+  {
+    "className": "Statistique",
+    "relations": 1
+  },
+  {
+    "className": "IndicateurPerformance",
+    "relations": 1
+  }
+]

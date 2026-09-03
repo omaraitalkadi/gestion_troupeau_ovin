@@ -1,0 +1,230 @@
+/* À fusionner dans sante.css — page Utilisateurs */
+
+.utilisateurs-page { max-width: 900px; }
+
+/* Interrupteur (toggle) */
+.toggle {
+  --w: 40px; --h: 22px; --pad: 3px;
+  width: var(--w);
+  height: var(--h);
+  border-radius: 999px;
+  border: none;
+  background: #d1d5db;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.18s ease;
+  flex: 0 0 auto;
+}
+.toggle:disabled { opacity: 0.5; cursor: not-allowed; }
+.toggle.is-on { background: var(--primary, #2563eb); }
+.toggle-knob {
+  position: absolute;
+  top: var(--pad);
+  left: var(--pad);
+  width: calc(var(--h) - var(--pad) * 2);
+  height: calc(var(--h) - var(--pad) * 2);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  transition: transform 0.18s ease;
+}
+.toggle.is-on .toggle-knob {
+  transform: translateX(calc(var(--w) - var(--h)));
+}
+
+/* Onglets */
+.tab-bar {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+  margin-bottom: 1.25rem;
+}
+.tab-bar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.88rem;
+  color: var(--text-muted, #6b7280);
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+.tab-bar button.is-active {
+  color: var(--primary, #2563eb);
+  border-bottom-color: var(--primary, #2563eb);
+  font-weight: 600;
+}
+
+/* Matrice permissions */
+.matrice-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.matrice-table th {
+  text-align: center;
+  font-weight: 600;
+  color: var(--text-muted, #6b7280);
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+}
+.matrice-table th:first-child { text-align: left; }
+.matrice-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--border, #f0f1f3);
+}
+.matrice-module { font-weight: 600; }
+.matrice-cell { text-align: center; }
+.matrice-cell .toggle { margin: 0 auto; }
+
+.matrice-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+/* Notifications */
+.notif-groupe { margin-bottom: 1.25rem; }
+.notif-groupe-titre {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted, #6b7280);
+  margin: 0 0 0.5rem;
+}
+.notif-ligne {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--border, #eef0f2);
+  border-radius: 8px;
+  margin-bottom: 0.4rem;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.notif-ligne:hover { border-color: var(--primary, #2563eb); background: #f8fafc; }
+
+/* Mot de passe (modale création) */
+.mdp-row { display: flex; gap: 0.4rem; align-items: center; }
+.mdp-row input { flex: 1; }
+
+/* Feedback */
+.form-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #16a34a;
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+/* Sections repliables (modale création) */
+.collapse-section {
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 8px;
+  margin-top: 0.75rem;
+  overflow: hidden;
+}
+.collapse-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--surface-2, #f9fafb);
+  border: none;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text, #111827);
+}
+.collapse-count {
+  margin-left: auto;
+  font-weight: 500;
+  font-size: 0.78rem;
+  color: var(--text-muted, #6b7280);
+}
+.collapse-section .matrice-table { padding: 0.5rem 0.85rem; }
+.collapse-section .matrice-table th,
+.collapse-section .matrice-table td { padding: 0.4rem 0.6rem; }
+.notif-compact { padding: 0.5rem 0.85rem 0.85rem; }
+.notif-compact .notif-groupe { margin-bottom: 0.75rem; }
+.collapse-empty {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+/* Récap compte créé */
+.recap-card {
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.85rem;
+  background: var(--surface-2, #f9fafb);
+}
+.recap-ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--border, #eef0f2);
+  font-size: 0.88rem;
+}
+.recap-ligne:last-child { border-bottom: none; }
+.recap-ligne span { color: var(--text-muted, #6b7280); }
+.recap-ligne strong { text-align: right; word-break: break-word; }
+.recap-mdp strong {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  background: #fff;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 6px;
+  padding: 0.15rem 0.5rem;
+  letter-spacing: 0.02em;
+}
+.btn-copy {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: var(--primary, #2563eb);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-copy:hover { background: var(--primary-dark, #1d4ed8); }
+.btn-copy.is-copied { background: #16a34a; }
+
+/* Profil lecture seule */
+.profil-bloc {
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+.profil-liste { margin: 0; padding-left: 1.1rem; font-size: 0.9rem; line-height: 1.7; }
+.profil-note { margin-top: 0.6rem; font-size: 0.78rem; }
+
+/* réutilise .btn-danger, .btn-small, .adv-field-row, .modal-subtitle, .programme-table,
+   .programme-badge, .link-cell du fichier sante-programme-vaccination.css */

@@ -1,0 +1,54 @@
+/* ═══════════════════════════════════════════════════════════
+   LotAnimals.css — styles spécifiques à la page LotAnimals
+   Les classes communes (table, chips, search, badges...)
+   viennent de index.css et Troupeau.css
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Pagination ──────────────────────────── */
+.la-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px 18px 14px;
+  border-top: 1px solid var(--border-soft, #EFEAE0);
+  flex-wrap: wrap;
+}
+
+.la-page-numbers {
+  display: flex;
+  gap: 4px;
+}
+
+.la-page-num {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--border, #E5DED0);
+  background: var(--bg-card, #FDFBF6);
+  color: var(--ink, #1B1F1B);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.la-page-num:hover {
+  background: var(--moss-pale, #E3EBE5);
+  border-color: var(--moss-soft, #3D6052);
+}
+
+.la-page-num.is-active {
+  background: var(--moss, #2D4A3E);
+  border-color: var(--moss, #2D4A3E);
+  color: white;
+}
+
+/* ── Hero lot — ajustement de l'icône ───── */
+.animal-avatar svg {
+  color: var(--moss, #2D4A3E);
+}

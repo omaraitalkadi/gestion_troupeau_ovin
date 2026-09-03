@@ -1,0 +1,535 @@
+/* ============================================================
+   sante.css — page Santé & Vaccination (index) + fiche Médicament
+   Scopé sous .sante-page et .medicament-detail-page.
+   Couleurs via tokens + repli neutre.
+   ============================================================ */
+
+/* ─────────────────────── INDEX ─────────────────────── */
+.sante-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.sante-page .ali-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.sante-page .eyebrow,
+.medicament-detail-page .eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted, #8a929b);
+}
+.sante-page .page-title,
+.medicament-detail-page .page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 650;
+  color: var(--text, #1a2027);
+}
+.sante-page .page-title svg,
+.medicament-detail-page .page-title svg { color: var(--accent, #2f7d5b); }
+
+/* Toggle segmenté */
+.sante-page .seg {
+  display: inline-flex;
+  align-self: flex-start;
+  gap: 4px;
+  padding: 4px;
+  background: var(--surface-muted, #f1f3f4);
+  border: 1px solid var(--border, #e6e9ec);
+  border-radius: 11px;
+}
+.sante-page .seg button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 550;
+  color: var(--text-muted, #5b6670);
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.14s, color 0.14s, box-shadow 0.14s;
+}
+.sante-page .seg button:hover:not(.is-active) { color: var(--text, #1a2027); }
+.sante-page .seg button.is-active {
+  color: var(--text, #1a2027);
+  background: var(--surface, #ffffff);
+  box-shadow: 0 1px 3px rgba(17, 24, 28, 0.14);
+}
+.sante-page .seg-count {
+  min-width: 1.4em;
+  padding: 0 0.4em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--text-muted, #6b7580);
+  background: var(--surface-muted, #e9ecee);
+  border-radius: 999px;
+}
+.sante-page .seg button.is-active .seg-count {
+  color: var(--accent-strong, #226047);
+  background: var(--accent-wash, #e7f2ec);
+}
+
+/* Grille de cartes */
+.sante-page .ali-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem;
+}
+.sante-page .ali-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1rem 1.1rem;
+  text-decoration: none;
+  color: inherit;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #e6e9ec);
+  border-radius: 14px;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+.sante-page .ali-card:not(.is-static):hover {
+  border-color: var(--accent-soft, #cfe3d8);
+  box-shadow: 0 8px 22px -14px rgba(17, 24, 28, 0.3);
+  transform: translateY(-1px);
+}
+.sante-page .ali-card.is-static { cursor: default; }
+
+.sante-page .ali-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.sante-page .ali-card-name {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text, #1a2027);
+}
+.sante-page .ali-card-desc {
+  margin: 0;
+  font-size: 0.83rem;
+  color: var(--text-muted, #6b7580);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.sante-page .ali-card-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--text-muted, #5b6670);
+  font-variant-numeric: tabular-nums;
+}
+.sante-page .ali-card-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.sante-page .ali-card-stats svg { color: var(--text-muted, #aab2ba); flex-shrink: 0; }
+.sante-page .ali-card-stats .is-warning { color: var(--danger-text, #b4552b); font-weight: 600; }
+.sante-page .ali-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.15rem;
+  font-size: 0.8rem;
+  font-weight: 550;
+  color: var(--accent, #2f7d5b);
+}
+
+/* Badges */
+.sante-page .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 550;
+  border-radius: 6px;
+  color: var(--text-muted, #5b6670);
+  background: var(--surface-muted, #eef0f1);
+  white-space: nowrap;
+}
+.sante-page .badge.statut-EN_COURS { color: #1f6f43; background: #e4f4ea; }
+.sante-page .badge.statut-PROGRAMMEE { color: #1c5b8a; background: #e4eff8; }
+.sante-page .badge.statut-TERMINEE { color: #5b6670; background: #eceef0; }
+.sante-page .badge.statut-ANNULEE { color: #9a2c2c; background: #fbeaea; }
+
+/* États */
+.sante-page .table-state,
+.sante-page .ali-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--text-muted, #6b7580);
+  background: var(--surface, #ffffff);
+  border: 1px dashed var(--border, #dfe3e6);
+  border-radius: 14px;
+}
+.sante-page .table-state svg,
+.sante-page .ali-empty svg { color: var(--text-muted, #aab2ba); }
+.sante-page .table-state p,
+.sante-page .ali-empty p { margin: 0; }
+.sante-page .table-state.is-error {
+  color: var(--danger-text, #9a2c2c);
+  background: var(--danger-bg, #fdf4f4);
+  border-color: var(--danger-border, #f1c7c7);
+}
+.sante-page .table-state.is-error svg { color: var(--danger-text, #c0554f); }
+
+/* Champs de formulaire côte à côte dans les modales */
+.med-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+@media (max-width: 480px) { .med-form-row { grid-template-columns: 1fr; } }
+
+/* ──────────────────── FICHE MÉDICAMENT ──────────────────── */
+.medicament-detail-page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+.medicament-detail-page .page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.medicament-detail-page .link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.6rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--text-muted, #6b7580);
+  transition: color 0.12s;
+}
+.medicament-detail-page .link:hover { color: var(--accent, #2f7d5b); }
+.medicament-detail-page .page-subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted, #6b7580);
+}
+.medicament-detail-page .page-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.medicament-detail-page .detail-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+}
+.medicament-detail-page .detail-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #e6e9ec);
+  border-radius: 14px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.medicament-detail-page .detail-card:hover {
+  border-color: var(--accent-soft, #cfe3d8);
+  box-shadow: 0 6px 20px -12px rgba(17, 24, 28, 0.25);
+}
+.medicament-detail-page .detail-card.is-warning {
+  border-color: var(--danger-border, #eecaa6);
+  background: var(--danger-wash, #fdf3ea);
+}
+.medicament-detail-page .detail-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted, #8a929b);
+}
+.medicament-detail-page .detail-value {
+  font-size: 1.35rem;
+  font-weight: 650;
+  line-height: 1.1;
+  color: var(--text, #1a2027);
+  font-variant-numeric: tabular-nums;
+}
+.medicament-detail-page .detail-sub {
+  font-size: 0.75rem;
+  color: var(--danger-text, #b4552b);
+  font-weight: 550;
+}
+.medicament-detail-page .table-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background: var(--surface, #ffffff);
+  border: 1px dashed var(--border, #dfe3e6);
+  border-radius: 14px;
+  color: var(--text-muted, #6b7580);
+}
+.medicament-detail-page .table-state svg { color: var(--text-muted, #aab2ba); }
+.medicament-detail-page .table-state p { margin: 0; max-width: 44ch; }
+.medicament-detail-page .table-state.is-error {
+  color: var(--danger-text, #9a2c2c);
+  background: var(--danger-bg, #fdf4f4);
+  border-color: var(--danger-border, #f1c7c7);
+}
+.medicament-detail-page .table-state.is-error svg { color: var(--danger-text, #c0554f); }
+.medicament-detail-page .muted { color: var(--text-muted, #6b7580); }
+
+/* Spinner partagé */
+.spin { animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin { animation: none; } }
+
+@media (max-width: 560px) {
+  .sante-page .seg { width: 100%; }
+  .sante-page .seg button { flex: 1; justify-content: center; }
+  .medicament-detail-page .page-header { flex-direction: column; }
+}
+
+
+
+
+/* À fusionner dans sante.css — classes utilisées par la section "Programmes de vaccination" */
+
+.programme-section {
+  margin-top: 1.5rem;
+}
+
+.programme-section .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.programme-section .section-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.programme-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.programme-table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-muted, #6b7280);
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+}
+
+.programme-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border, #f0f1f3);
+  vertical-align: middle;
+}
+
+.programme-table tr.is-inactive td {
+  opacity: 0.55;
+}
+
+.link-cell {
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: 600;
+  color: var(--primary, #2563eb);
+  cursor: pointer;
+  text-align: left;
+}
+.link-cell:hover {
+  text-decoration: underline;
+}
+
+.programme-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #f3f4f6;
+  color: #6b7280;
+}
+.programme-badge.is-active {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.programme-row-actions {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.btn-small {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.btn-danger:hover { background: #b91c1c; }
+.btn-danger:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.confirm-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+}
+
+.form-error-small {
+  display: block;
+  font-size: 0.72rem;
+  margin-top: 0.25rem;
+}
+
+.adv-field-row {
+  display: flex;
+  gap: 0.75rem;
+}
+.adv-field-row .adv-field {
+  flex: 1;
+}
+
+.quick-panel {
+  background: #fff;
+  width: 380px;
+  max-width: 90vw;
+  height: 100%;
+  margin-left: auto;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Modal "Programmer vaccination" */
+
+.modal-lg {
+  width: 480px;
+  max-width: 92vw;
+}
+
+.modal-subtitle {
+  padding: 0 1.25rem;
+  margin: -0.25rem 0 0.75rem;
+  font-size: 0.82rem;
+  color: var(--text-muted, #6b7280);
+}
+
+.form-fieldset {
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 8px;
+  padding: 0.75rem 1rem 1rem;
+  margin: 0 0 1rem;
+}
+
+.form-fieldset legend {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted, #6b7280);
+  padding: 0 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.unit-toggle {
+  display: inline-flex;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 6px;
+  overflow: hidden;
+  width: fit-content;
+}
+.unit-toggle button {
+  border: none;
+  background: #fff;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color: var(--text-muted, #6b7280);
+}
+.unit-toggle button + button {
+  border-left: 1px solid var(--border, #e5e7eb);
+}
+.unit-toggle button.is-selected {
+  background: var(--primary, #2563eb);
+  color: #fff;
+  font-weight: 600;
+}
+
+.field-error {
+  font-size: 0.72rem;
+  color: #dc2626;
+  margin: 0.25rem 0 0;
+}
+
+.modal-summary {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.82rem;
+  margin: 0 0 0.75rem;
+}

@@ -1,0 +1,100 @@
+/* ============================================================
+   Page /notifications — réutilise .notif-item / sev-* / lue
+   définis dans NotificationBell.css (importé par la cloche,
+   donc déjà présent dès que le layout est monté).
+   ============================================================ */
+
+.notifications-page {
+  max-width: 720px;
+}
+
+.notifications-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.notifications-filtres {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.notif-filtre {
+  background: none;
+  border: 1px solid var(--border, #e2e2e2);
+  border-radius: 16px;
+  padding: 4px 14px;
+  font-size: 0.82rem;
+  color: var(--text-muted, #6b7280);
+  cursor: pointer;
+}
+.notif-filtre.actif {
+  border-color: var(--accent, #2563eb);
+  color: var(--accent, #2563eb);
+  font-weight: 600;
+}
+
+.notifications-liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--border, #e2e2e2);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface, #ffffff);
+}
+
+.notifications-liste li:last-child .notif-item {
+  border-bottom: none;
+}
+
+/* Variante page : message visible + date alignée à droite */
+.notif-item-page {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.notif-item-page-main {
+  min-width: 0;
+}
+
+.notif-item-page .notif-message {
+  font-size: 0.8rem;
+  color: var(--text-muted, #6b7280);
+  margin-top: 2px;
+  line-height: 1.35;
+}
+
+.notif-item-page .notif-date {
+  margin-top: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.notifications-vide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 48px 0;
+  color: var(--text-muted, #6b7280);
+}
+
+.notifications-chargement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px;
+  color: var(--text-muted, #6b7280);
+  font-size: 0.85rem;
+}
+
+.notifications-charger-plus {
+  text-align: center;
+  padding: 16px 0;
+}
