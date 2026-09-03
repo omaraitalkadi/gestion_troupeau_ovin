@@ -21,6 +21,7 @@ import sante from './backend/routes/sante.js'
 import test from './backend/routes/testTemps.js'
 import reproduction from './backend/routes/reproduction.js'
 import dashboard from './backend/routes/route_dashboard.js';
+import permissionModule from './backend/middleware/exigerPermissionModule.js';
 
  
 
@@ -79,15 +80,15 @@ app.get("/api/health", (_req, res) => {
 });
 
 
-app.use("/api/alimentation",alimentation);
-app.use("/api/finance",finance);
-app.use("/api/animals", animalsRouter);
+app.use("/api/alimentation",permissionModule('ALIMENTATION'),alimentation);
+app.use("/api/finance",permissionModule('FINANCE'),finance);
+app.use("/api/animals",permissionModule('TROUPEAU'), animalsRouter);
 app.use("/api/utilisateur", usersRouter);
-app.use("/api/lots", lotsRouter);
+app.use("/api/lots",permissionModule('TROUPEAU'), lotsRouter);
 app.use("/api/alertes",alereteApi);
-app.use("/api/sante",sante);
+app.use("/api/sante",permissionModule('SANTE'),sante);
 app.use("/api/test",test);
-app.use("/api/reproduction",reproduction);
+app.use("/api/reproduction",permissionModule('REPRODUCTION'),reproduction);
 app.use("/api/dashboard",dashboard);
 
 
