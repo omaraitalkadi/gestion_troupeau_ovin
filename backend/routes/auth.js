@@ -4,6 +4,7 @@ import { login, logout, changePassword, signup } from "../services/AuthService.j
 import { authenticate } from "../middleware/authenticate.js";
 import { loginLimiter, signupLimiter } from "../middleware/rateLimiter.js";
 import dotenv from "dotenv";
+import { demarrerInscription,confirmerInscription,renvoyerCode } from "../services/SignupService.js";
 dotenv.config();
 
 const router = express.Router();
@@ -16,33 +17,45 @@ const COOKIE_OPTS = {
   maxAge:   7 * 24 * 60 * 60 * 1000, // 7 jours
 };
 
-// POST /api/auth/signup
-router.post("/signup", signupLimiter, async (req, res, next) => {
-  try {
-    const { utilisateur, ferme, sessionId } =  await signup(req.body, {
-      ip: req.ip,
-      userAgent: req.headers["user-agent"],
-    });
-    res.cookie("session_id", sessionId, COOKIE_OPTS);
-    res.status(201).json({ utilisateur, ferme_id: ferme.id });
-  } catch (err) { next(err); }
+router.post("/signup/start",   signupLimiter, async (req,res,next)=>{ 
+  try{ 
+    res.json(await demarrerInscription(req.body,{ip:req.ip})); 
+  }catch(e){
+    next(e);
+  } 
 });
 
-// POST /api/auth/login
-router.post("/login", loginLimiter, async (req, res, next) => {
-  try {
-    const { identifiant, type, password } = req.body;
-    if (!identifiant || !password)
-      return res.status(400).json({ error: "identifiant et password requis" });
- 
-    const { sessionId, user, mustChangePassword } = await login({
-      identifiant, type, password,
-      ip: req.ip, userAgent: req.headers["user-agent"],
-    });
- 
-    res.cookie("session_id", sessionId, COOKIE_OPTS);
-    res.json({ user, mustChangePassword });
-  } catch (err) { next(err); }
+
+router.post("/signup/verify",  signupLimiter, async (req,res,next)=>{ 
+  try{
+   const { utilisateur, ferme_id, sessionId } = await confirmerInscription(req.body,{ip:req.ip,userAgent:req.headers["user-agent"]});
+   res.cookie("session_id", sessionId, COOKIE_OPTS); res.status(201).json({ utilisateur, ferme_id });
+  }catch(e){
+    next(e);
+
+  } 
+});
+
+
+router.post("/signup/resend",  signupLimiter, async (req,res,next)=>{ 
+  try{ 
+    res.json(await renvoyerCode(req.body)); }catch(e){
+      next(e);
+
+    } 
+  });
+
+// login : le body porte { identifiant, type: "admin"|"employe", password }
+router.post("/login", loginLimiter, async (req,res,next)=>{ try{
+  const { identifiant, type, password } = req.body;
+  if (!identifiant || !password) return res.status(400).json({ error:"identifiant et password requis" });
+  const { sessionId, user, mustChangePassword } = await login({ identifiant, type, password, ip:req.ip, userAgent:req.headers["user-agent"] });
+  res.cookie("session_id", sessionId, COOKIE_OPTS);
+  res.json({ user, mustChangePassword });
+  }catch(e){
+    next(e);
+
+   } 
 });
  
 

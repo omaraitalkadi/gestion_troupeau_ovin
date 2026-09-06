@@ -351,4 +351,4 @@ export async function getUtilisateurDetail(id) {
     aInitialisePermissions: perms.length > 0,
     aInitialiseNotifications: notifs.length > 0,
   };
-}
+}  

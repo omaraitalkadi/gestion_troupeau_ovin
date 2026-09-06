@@ -21,7 +21,7 @@ import sante from './backend/routes/sante.js'
 import test from './backend/routes/testTemps.js'
 import reproduction from './backend/routes/reproduction.js'
 import dashboard from './backend/routes/route_dashboard.js';
-import permissionModule from './backend/middleware/exigerPermissionModule.js';
+import {permissionModule} from './backend/middleware/exigerPermissionModule.js';
 
  
 
