@@ -1,38 +1,48 @@
 // server/services/EmailService.js
-// Envoi d'emails via Resend (https://resend.com). Le SDK gère l'appel API ;
-// la clé vient de l'environnement, jamais en dur.
+// Envoi via Nodemailer + Gmail (App Password). Envoie depuis TON Gmail vers
+// n'importe quel destinataire — pas de domaine à vérifier.
+//
+// Prérequis Google :
+//   1. Validation en 2 étapes ACTIVÉE sur le compte Google.
+//   2. Compte Google → Sécurité → "Mots de passe des applications" → générer
+//      un mot de passe (16 caractères) pour "Mail".
 //
 // .env :
-//   RESEND_API_KEY=re_xxxxxxxx
-//   EMAIL_FROM="Ovinéa <no-reply@tondomaine.com>"   # domaine vérifié chez Resend
+//   GMAIL_USER=tonadresse@gmail.com
+//   GMAIL_APP_PASSWORD=xxxxxxxxxxxxxxxx      # le mot de passe d'application, PAS ton vrai mdp
 //   APP_NAME=Ovinéa
-//
-// ⚠️ En dev, sans domaine vérifié, Resend n'autorise l'envoi que vers TON
-//    adresse de compte et depuis "onboarding@resend.dev". Vérifie un domaine
-//    pour envoyer à de vrais utilisateurs.
-import { Resend } from "resend";
+//   EMAIL_FROM="Ovinéa <tonadresse@gmail.com>"   # optionnel ; défaut = GMAIL_USER
+import nodemailer from "nodemailer";
 
 const APP_NAME = process.env.APP_NAME || "Ovinéa";
-const FROM      = process.env.EMAIL_FROM || "Ovinéa <onboarding@resend.dev>";
 
-// Instancié paresseusement : si la clé manque, on le signale clairement au 1er envoi.
-let _resend = null;
-function client() {
-  if (_resend) return _resend;
-  const key = process.env.RESEND_API_KEY;
-  if (!key) throw Object.assign(new Error("RESEND_API_KEY manquante (configuration email)"), { status: 500 });
-  _resend = new Resend(key);
-  return _resend;
+// Transport créé paresseusement ; erreur claire si config manquante.
+let _transport = null;
+function transport() {
+  if (_transport) return _transport;
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_APP_PASSWORD;
+  if (!user || !pass)
+    throw Object.assign(new Error("GMAIL_USER / GMAIL_APP_PASSWORD manquants (config email)"), { status: 500 });
+  _transport = nodemailer.createTransport({
+    service: "gmail",
+    auth: { user, pass },
+  });
+  return _transport;
 }
 
-// Enveloppe HTML minimale et sobre (les clients email supportent mal le CSS avancé).
+function from() {
+  return process.env.EMAIL_FROM || `${APP_NAME} <${process.env.GMAIL_USER}>`;
+}
+
+// Gabarit HTML sobre (les clients mail supportent mal le CSS avancé).
 function gabarit({ titre, intro, encadre, pied }) {
   return `<!doctype html>
 <html lang="fr"><body style="margin:0;background:#f4f4f2;font-family:Arial,Helvetica,sans-serif;color:#1f2421;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="padding:24px 0;">
     <tr><td align="center">
       <table role="presentation" width="440" cellpadding="0" cellspacing="0"
-             style="background:#ffffff;border-radius:12px;padding:32px;max-width:440px;">
+             style="background:#fff;border-radius:12px;padding:32px;max-width:440px;">
         <tr><td style="font-size:20px;font-weight:bold;padding-bottom:4px;">🐑 ${APP_NAME}</td></tr>
         <tr><td style="font-size:16px;font-weight:bold;padding:12px 0 4px;">${titre}</td></tr>
         <tr><td style="font-size:14px;line-height:1.5;color:#4a524c;">${intro}</td></tr>
@@ -45,19 +55,15 @@ function gabarit({ titre, intro, encadre, pied }) {
 }
 
 async function envoyer({ to, subject, html }) {
-  const { data, error } = await client().emails.send({ from: FROM, to, subject, html });
-  if (error) {
-    // Resend renvoie l'erreur dans `error` (pas un throw) → on la propage nous-mêmes.
-    throw Object.assign(new Error(`Envoi email échoué : ${error.message || error.name || "inconnu"}`), { status: 502 });
+  try {
+    return await transport().sendMail({ from: from(), to, subject, html });
+  } catch (e) {
+    throw Object.assign(new Error(`Envoi email échoué : ${e.message}`), { status: 502 });
   }
-  return data; // { id }
 }
 
 /**
  * Code de vérification d'inscription (6 chiffres).
- * @param {string} email
- * @param {string} code   6 chiffres
- * @param {number} [ttlMin=20]
  */
 export async function envoyerCodeVerification(email, code, ttlMin = 20) {
   const encadre = `
@@ -78,9 +84,7 @@ export async function envoyerCodeVerification(email, code, ttlMin = 20) {
 }
 
 /**
- * Lien de réinitialisation de mot de passe (admin uniquement).
- * @param {string} email
- * @param {string} lien  URL complète avec token
+ * Lien de réinitialisation de mot de passe (admin).
  */
 export async function envoyerLienReset(email, lien) {
   const encadre = `
@@ -95,7 +99,7 @@ export async function envoyerLienReset(email, lien) {
       titre: "Réinitialiser votre mot de passe",
       intro: "Cliquez sur le bouton ci-dessous pour choisir un nouveau mot de passe. Ce lien est valable une durée limitée.",
       encadre,
-      pied: "Si vous n'avez pas demandé cette réinitialisation, ignorez cet email — votre mot de passe reste inchangé.",
+      pied: "Si vous n'avez pas demandé cette réinitialisation, ignorez cet email.",
     }),
   });
 }

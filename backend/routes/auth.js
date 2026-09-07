@@ -21,6 +21,7 @@ router.post("/signup/start",   signupLimiter, async (req,res,next)=>{
   try{ 
     res.json(await demarrerInscription(req.body,{ip:req.ip})); 
   }catch(e){
+    console.log('/api/auth/signup/start    catch error')
     next(e);
   } 
 });
